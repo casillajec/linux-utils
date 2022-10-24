@@ -1,0 +1,17 @@
+#!/bin/sh
+
+FORMAT="png"
+
+FILENAME="$(date +%Y-%m-%e_%H-%M-%S.%N)"
+
+OPTS="-q 100"
+
+TARGET_FOLDER="$HOME/screenshots"
+
+if [ $# -gt 0 ] && [ $1 = "--selection" ]; then
+	OPTS="$OPTS -s"
+fi
+
+mkdir -p $HOME/screenshots
+
+scrot $OPTS "$TARGET_FOLDER/$FILENAME.$FORMAT"
