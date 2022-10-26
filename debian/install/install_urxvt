@@ -1,0 +1,5 @@
+#!/bin/sh
+
+echo "Installing urxvt" \
+ && apt install rxvt-unicode
+
