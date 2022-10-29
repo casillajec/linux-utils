@@ -1,5 +1,7 @@
 #!/bin/sh
 
+. "./check_id.sh"
+
 TARGET_DIR="$HOME/bin"
 
 I3_CONFIG_FILE="$HOME/.config/i3/config"
@@ -17,5 +19,7 @@ echo "Installing screenshot dependencies..." \
  && echo "Copying screenshot script" \
  && cp ../scripts/screenshot $TARGET_DIR \
  && echo "Setting up i3 shortcut to $I3_SHORTCUT and $I3_SELECTION_SHORTCUT with selection" \
- && ([ $(grep "$I3_INSTALLER_ID" $I3_CONFIG_FILE | wc -l) -eq 0 ] && echo "$I3_CONFIG" >> $I3_CONFIG_FILE || echo "Already configured i3") \
+ && (check_id "$I3_INSTALLER_ID" "$I3_CONFIG_FILE" \
+	&& echo "Already configured i3" \
+	|| echo "$I3_CONFIG" >> "$I3_CONFIG_FILE") \
  && echo "Done"
